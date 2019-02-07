@@ -27,6 +27,11 @@ void pid_new(FastPID *pid, float kp, float ki, float kd,
     pid_configure(pid, kp, ki, kd, hz, bits, sign);
 }
 
+void pid_set_cfg_err(FastPID *pid) {
+  pid->_cfg_err = true;
+  pid->_p = pid->_i = pid->_d = 0;
+}
+
 uint32_t pid_float_to_param(FastPID *pid, float in) {
   if (in > PARAM_MAX || in < 0) {
     pid_set_cfg_err(pid);
@@ -41,11 +46,6 @@ uint32_t pid_float_to_param(FastPID *pid, float in) {
   }
   
   return param;
-}
-
-void pid_set_cfg_err(FastPID *pid) {
-  pid->_cfg_err = true;
-  pid->_p = pid->_i = pid->_d = 0;
 }
 
 void pid_clear(FastPID *pid) {

@@ -20,6 +20,7 @@
 #define _fastpid_h
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #define INTEG_MAX    (INT32_MAX)
 #define INTEG_MIN    (INT32_MIN)
@@ -114,5 +115,10 @@ int16_t pid_step(FastPID *pid, int16_t sp, int16_t fb);
  * function returns true.
  */
 bool pid_err(FastPID *pid);
+
+/**
+ * Convert a floating point parameter to the equivalent integer value.
+ */
+uint32_t pid_float_to_param(FastPID *pid, float in);
 
 #endif // _fastpid_h

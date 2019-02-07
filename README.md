@@ -55,4 +55,21 @@ See the separate [API documentation][api] for API details.
 
 ## Tests & Examples
 
-**NB**: The tests and examples have not yet been ported over to work with avr-gcc.
+**NB**: The examples have not yet been ported over to work with avr-gcc.
+
+There are some simple unit tests in the `test/` directory; you can run them like this:
+
+    make -C test
+
+The expected output will be something like:
+
+    make: Entering directory '/home/lars/src/FastPID/test'
+    test_pid_set_limits.ok
+    test_pid_clear.ok
+    test_pid_set_output.ok
+    test_pid_step.ok
+    test_pid_new.ok
+    All tests passed.
+    make: Leaving directory '/home/lars/src/FastPID/test'
+
+The tests are defined in files named `test_<something>.c`.  The other files in the `test/` directory are from the upstream Arduino project and will not be useful with this code.

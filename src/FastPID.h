@@ -20,6 +20,7 @@
 #define _fastpid_h
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #define INTEG_MAX    (INT32_MAX)
 #define INTEG_MIN    (INT32_MIN)

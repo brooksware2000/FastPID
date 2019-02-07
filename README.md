@@ -52,3 +52,7 @@ For comparison the excellent [ArduinoPID](https://github.com/br3ttb/Arduino-PID-
 See the separate [API documentation][api] for API details.
 
 [api]: http://oddbit.com/FastPID/
+
+## Tests & Examples
+
+**NB**: The tests and examples have not yet been ported over to work with avr-gcc.

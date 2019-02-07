@@ -1,7 +1,9 @@
 /**
- * \file pid.c
+ * \file FastPID.c
  *
- * This is a port of Mike Matera's [FastPID][] code.  From Mike's `README`:
+ * This is a port of Mike Matera's
+ * [FastPID](https://github.com/mike-matera/FastPID) code.  From Mike's
+ * `README`:
  *
  * > This PID controller is faster than alternatives for Arduino because it avoids
  * > expensive floating point operations. The PID controller is configured with
@@ -12,17 +14,13 @@
  * > frequency. The Ki and Kd parameters are scaled by the frequency to save time
  * > during the step() operation.
  *
- * [fastpid]: https://github.com/mike-matera/FastPID
+ * (See FastPID.h for function documentation.)
  */
 
 #include <stdint.h>
 #include <stdbool.h>
 
 #include "FastPID.h"
-
-void pid_new_default(FastPID *pid) {
-    pid_clear(pid);
-}
 
 void pid_new(FastPID *pid, float kp, float ki, float kd,
         float hz, int bits, bool sign) {
@@ -31,14 +29,14 @@ void pid_new(FastPID *pid, float kp, float ki, float kd,
 
 uint32_t pid_float_to_param(FastPID *pid, float in) {
   if (in > PARAM_MAX || in < 0) {
-    pid->_cfg_err = true;
+    pid_set_cfg_err(pid);
     return 0;
   }
 
   uint32_t param = in * PARAM_MULT;
 
   if (in != 0 && param == 0) {
-    pid->_cfg_err = true;
+    pid_set_cfg_err(pid);
     return 0;
   }
   
@@ -166,4 +164,8 @@ int16_t pid_step(FastPID *pid, int16_t sp, int16_t fb) {
 
   pid->_last_out = rval;
   return rval;
+}
+
+bool pid_err(FastPID *pid) {
+    return pid->_cfg_err;
 }
